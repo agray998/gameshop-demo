@@ -1,6 +1,7 @@
--- CRUD
+-- DDL
 CREATE DATABASE IF NOT EXISTS games_db;
 USE games_db;
+
 CREATE TABLE IF NOT EXISTS customers (
   customer_id INT PRIMARY KEY AUTO_INCREMENT,
   customer_name VARCHAR(50) NOT NULL,
@@ -10,7 +11,7 @@ CREATE TABLE IF NOT EXISTS customers (
   dob DATE NOT NULL
 );
 
-CREATE TABLE orders (
+CREATE TABLE IF NOT EXISTS orders (
   order_id INT PRIMARY KEY AUTO_INCREMENT,
   customer_id INT NOT NULL,
   order_date DATE NOT NULL,
@@ -18,7 +19,7 @@ CREATE TABLE orders (
   FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
-CREATE TABLE games (
+CREATE TABLE IF NOT EXISTS games (
   game_id INT PRIMARY KEY AUTO_INCREMENT,
   title VARCHAR(100) NOT NULL,
   unit_price DOUBLE NOT NULL,
@@ -27,7 +28,7 @@ CREATE TABLE games (
   age_rating INT NOT NULL
 );
 
-CREATE TABLE orders_games (
+CREATE TABLE IF NOT EXISTS orders_games (
   orders_games_id INT PRIMARY KEY AUTO_INCREMENT,
   order_id INT NOT NULL,
   game_id INT NOT NULL,
@@ -36,6 +37,10 @@ CREATE TABLE orders_games (
   FOREIGN KEY (game_id) REFERENCES games(game_id)
 );
 
--- ALTER TABLE games
--- DROP COLUMN genre;
+/* for adding/deleting columns
+ALTER TABLE games
+ADD COLUMN genre VARCHAR(10) NOT NULL;
 
+ALTER TABLE games
+DROP COLUMN genre;
+*/
